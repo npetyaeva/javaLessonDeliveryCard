@@ -34,20 +34,20 @@ public class DeliveryCardTest2 {
 
     @Test
     void shouldCheckDropdownCities() {
-        String dates = dataGenerator.generateDate(3);
+        String planningDate = dataGenerator.generateDate(3);
 
         $("[placeholder = 'Город']").setValue("Ка");
         List<SelenideElement> cities = $$(".menu-item__control");
         int index = random.nextInt(cities.size());
         $$(".menu-item__control").get(index).click();
         $("[placeholder = 'Дата встречи']").doubleClick().sendKeys(Keys.BACK_SPACE);
-        $("[placeholder = 'Дата встречи']").setValue(dates);
+        $("[placeholder = 'Дата встречи']").setValue(planningDate);
         $("[name = 'name']").setValue(dataGenerator.generateName());
         $("[name = 'phone']").setValue(dataGenerator.generatePhone());
         $(".checkbox__text").click();
         $(".button").click();
         $(".notification__content").shouldBe(visible, Duration.ofSeconds(15))
-                .shouldHave(exactText("Встреча успешно забронирована на " + dates));
+                .shouldHave(exactText("Встреча успешно забронирована на " + planningDate));
     }
 
     @Test
